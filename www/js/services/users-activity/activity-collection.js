@@ -58,26 +58,10 @@ angular.module('app.services').factory('UsersActivityCollection',
       var page = parseInt((offset / 20) + 1);
       var types = ['post', 'petition'];
 
-      console.log(serverConfig.url + '/api/v2/activities?page='+page+'&user='+userid+'&type[]=post&type[]=petition');
-      var params = {
-        user: userid,
-        type: JSON.stringify(types)
-      };
-      // console.log(params);
       var p = new Promise(function(resolve, reject){
         $http({
           method: 'GET',
-          //url: serverConfig.url + '/api/v2/activities?page=1&user=130',
-
-
           url: serverConfig.url + '/api/v2/activities?page='+page+'&user='+userid+'&type[]=post&type[]=petition'
-/*
-          params: {
-            user: 'sdf',
-
-            type: JSON.stringify(types)
-          }
-*/
         }).then(function (response) {
           that.add(response.data.payload)
           resolve(that)
